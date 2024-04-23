@@ -29,10 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 在server.js中，我们引入并使用刚才创建的sqeuilze */
 const db = require("./app/models");
-db.sequelize.sync().then(() => {
-  console.log("创建数据库");
-});
-
+db.sequelize.sync();
+require("./app/routers/tutorial.routers")(app);
+ 
 
 app.get("/", (req, res) => {
   res.json({ message: "课程管理系统" });

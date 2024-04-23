@@ -9,10 +9,41 @@ const Tutorial = db.tutorials;
 1. 解析请求传递的数据
 2. 将数据保存到数据库
 3. 往前台返回操作的结果，也就是响应！
-所以这个接口会接受两个参数，requset(请求体)和respnonse（响应体）。 */
+所以这个接口会接受两个参数，request(请求体)和response（响应体）。 */
 
+
+/* 判断title是否存在
+对于一个课程来说，title肯定是必须的，
+所以我们最开始要先判断title是否存在。
+直接判断req.body.title存不存在， */
 exports.create = (req, res) => {
+    if (!req.body.title) {
+        res.status(400).send({
+            message: "课程名称不能为空"
+        });
+        return;
+    }
+
+    /* 解析数据
+    创建临时变量存储数据 */
+    const tutorial = {
+        title: req.body.title,
+        description: req.body.description,
+        published: req.body.published,
+    };
+
+    /* 保存数据，并响应
+在Sequelize中，模型是 Sequelize 的本质. 模型是代表数据库中表的抽象. 
+在 Sequelize 中,它是一个 Model 的扩展类。通过define定义的模型，会绑定很多方法。例如create方法。
+通过模型调用create方法，可以不用写sql，保存数据。 */
+    Tutorial.create(tutorial)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "创建课程出错"
+            });
+        });
 
 }
-
-
