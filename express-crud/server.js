@@ -24,6 +24,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/* 同步模型
+定义好模型之后，我们就可以同步模型！
+
+在server.js中，我们引入并使用刚才创建的sqeuilze */
 const db = require("./app/models");
 db.sequelize.sync().then(() => {
   console.log("创建数据库");
