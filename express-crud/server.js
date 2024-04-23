@@ -12,16 +12,29 @@
 
 */
 
-const express = require('express')
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+app.use(cors(corsOptions));
 
-const app = new express()
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/',(req,res)=>{
-     res.json({
-        'message': "课程管理系统"
-     })
-})
+const db = require("./app/models");
+db.sequelize.sync().then(() => {
+  console.log("创建数据库");
+});
 
-app.listen(3000,()=>{
-     console.log("项目已经成功运行,端口3000")
-})
+
+app.get("/", (req, res) => {
+  res.json({ message: "课程管理系统" });
+});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
+
