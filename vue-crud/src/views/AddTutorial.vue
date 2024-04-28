@@ -22,6 +22,8 @@
 <script  setup>
 import axios from "axios";
 import { reactive } from "vue";
+import TutorialDataApi from "../api/TutorialDataApi";
+
 const tutorial = reactive({
   title: "",
   description: "",
@@ -30,7 +32,13 @@ const tutorial = reactive({
 
 const Submit = () => {
   console.log(tutorial);
-  axios
+  TutorialDataApi.create(tutorial).then((res)=>{
+      console.log(res)
+  },err=>{
+    console.log(err)
+  })
+
+  /* axios
     .post("http://localhost:3000/api/tutorials", {
       title: tutorial.title,
       description: tutorial.description,
@@ -41,8 +49,6 @@ const Submit = () => {
     })
     .catch(function (error) {
       console.log(error);
-    });
+    }); */
 };
 </script>
-
-
