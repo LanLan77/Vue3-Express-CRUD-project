@@ -19,7 +19,13 @@ const routes = [
     path: '/add-tutorial',
     name: 'addTutorial',
     component: () => import(/* webpackChunkName: "about" */ '../views/AddTutorial.vue')
+  },
+  {
+    path: "/tutorials",
+    name: "tutorials",
+    component: () => import(/* webpackChunkName: "TutorialsList" */"../views/TutorialsList")
   }
+
 
 ]
 

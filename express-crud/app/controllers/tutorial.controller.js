@@ -47,3 +47,20 @@ exports.create = (req, res) => {
         });
 
 }
+/* 这里我们使用Sequlize的findAll方法！findAll方法本质上就是数据库 select语句的封装！
+在这个函数，我们干了两件事：
+使用findAll方法查询。
+使用send返回查询结果。 */
+
+exports.findAll = (req, res) => {
+    Tutorial.findAll()
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "查询所有课程出错",
+        });
+      });
+  };
+  

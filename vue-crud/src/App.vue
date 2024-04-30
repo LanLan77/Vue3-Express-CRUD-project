@@ -2,7 +2,9 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/add-tutorial"> 新增课程 </router-link>
+    <router-link to="/add-tutorial"> 新增课程 </router-link> |
+    <router-link to="/tutorials">课程列表</router-link>
+    
   </nav>
   <router-view />
 </template>

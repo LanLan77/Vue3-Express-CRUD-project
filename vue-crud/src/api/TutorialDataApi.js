@@ -5,5 +5,9 @@ class TutorialDataApi{
         console.log(data)
         return axiosUtil.post('/tutorials',data)
     }
+    getAll() {
+        return axiosUtil.get('/tutorials')
+    }
+
 }
 export default new TutorialDataApi();
