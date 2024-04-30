@@ -1,4 +1,92 @@
 <template>
+  <el-table :data="tutorialList" style="width: 100%">
+    <el-table-column label="Date" width="180">
+      <template #default="scope">
+        <div style="display: flex; align-items: center">
+          <el-icon :component="Timer"></el-icon>
+          <span style="margin-left: 10px">{{ scope.row.createdAt }}</span>
+        </div>
+      </template>
+    </el-table-column>
+    <el-table-column label="Name" width="180">
+      <template #default="scope">
+        <el-popover effect="light" trigger="hover" placement="top" width="auto">
+          <template #default>
+            <div>name: {{ scope.row.title }}</div>
+            <div>address: {{ scope.row.description }}</div>
+          </template>
+          <template #reference>
+            <el-tag>{{ scope.row.title }}</el-tag>
+          </template>
+        </el-popover>
+      </template>
+    </el-table-column>
+    <el-table-column label="Operations">
+      <template #default="scope">
+        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
+          Edit
+        </el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)"
+        >
+          Delete
+        </el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+
+<script setup>
+import { Timer } from "@element-plus/icons-vue";
+import TutorialDataApi from "../api/TutorialDataApi";
+import { onMounted, reactive } from "vue";
+
+let tutorialList = reactive([]);
+
+onMounted(() => {
+  TutorialDataApi.getAll()
+    .then((data) => {
+      tutorialList.splice(0, tutorialList.length, ...data);
+      console.log(tutorialList);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+const handleEdit = (index, row) => {
+  console.log(index, row);
+};
+const handleDelete = (index, row) => {
+  console.log(index, row);
+};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <template>
     <el-table :data="tutorialList" style="width: 100%">
       <el-table-column label="Date" width="180">
         <template #default="scope">
@@ -65,6 +153,6 @@
   const handleDelete = (index, row) => {
     console.log(index, row);
   };
-  </script>
+  </script> -->
   
   
