@@ -55,7 +55,7 @@ onMounted(() => {
     .catch((err) => {
       console.log(err);
     });
-});
+});  
 
 const handleEdit = (index, row) => {
   console.log(index, row);
@@ -87,6 +87,7 @@ const handleDelete = (index, row) => {
 
 
 <!-- <template>
+  123
     <el-table :data="tutorialList" style="width: 100%">
       <el-table-column label="Date" width="180">
         <template #default="scope">
